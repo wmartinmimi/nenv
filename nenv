@@ -1,0 +1,42 @@
+#!/bin/sh
+
+# settings
+version=3.18
+arch=aarch64
+
+distro_tar=~/.cache/nenv/distro/alpine-$version-$arch.tar.gz
+
+if [ -z $1 ]; then
+  echo "requires 1 argument (environment name)"
+  return 1
+fi
+
+if [ -e $1 ]; then
+  echo "file/directory $1 already exist"
+  return 1
+fi
+
+echo "creating new environment: $1"
+
+if [ ! -f $distro_tar ]; then
+
+  echo "creating cache directory... (~/.cache/nenv/distro)"
+  mkdir -p ~/.cache/nenv/distro
+
+  echo "downloading tar..."
+  curl https://dl-cdn.alpinelinux.org/alpine/v$version/releases/$arch/alpine-minirootfs-$version.0-$arch.tar.gz -o $distro_tar
+
+else
+
+  echo "cached tar found..."
+
+fi
+
+mkdir -p $1
+
+echo "extracting environment..."
+tar -xf $distro_tar --directory $1
+
+echo "new environment created: $1"
+
+return 0
