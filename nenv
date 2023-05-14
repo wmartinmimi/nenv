@@ -11,12 +11,14 @@ if [ -z $1 ]; then
   return 1
 fi
 
-if [ -e $1 ]; then
-  echo "file/directory $1 already exist"
+root=$1
+
+if [ -e $root ]; then
+  echo "file/directory $root already exist"
   return 1
 fi
 
-echo "creating new environment: $1"
+echo "creating new environment: $root"
 
 if [ ! -f $distro_tar ]; then
 
@@ -35,8 +37,11 @@ fi
 mkdir -p $1
 
 echo "extracting environment..."
-tar -xf $distro_tar --directory $1
+tar -xf $distro_tar --directory $root
 
-echo "new environment created: $1"
+echo "setting up environment..."
+echo "nameserver 1.1.1.1" > $1/etc/resolv.conf
+
+echo "new environment created: $root"
 
 return 0
