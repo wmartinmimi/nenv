@@ -28,3 +28,7 @@ git clone https://github.com/wmartinmimi/nenv
 cd nenv && chmod 700 nenv
 echo "alias nenv=$(pwd)/nenv" >> ~/.bashrc
 ```
+
+## License
+
+Licensed under ```Unlicense License```
