@@ -34,13 +34,13 @@ else
 
 fi
 
-mkdir -p $1
+mkdir -p $root
 
 echo "extracting environment..."
 tar -xf $distro_tar --directory $root
 
 echo "setting up environment..."
-echo "nameserver 1.1.1.1" > $1/etc/resolv.conf
+echo "nameserver 1.1.1.1" > $root/etc/resolv.conf
 
 echo "new environment created: $root"
 
